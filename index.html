@@ -15,6 +15,7 @@
 
 <body>
   <main id="app">
+
     <header>
       <h1 class="hidden">Welcome to ezaccess</h1>
       <nav class="d-flex justify-content-center">
@@ -30,7 +31,7 @@
     </p>
     <ul class="video-poster-wrapper">
       <h2 class="hidden">Media list</h2>
-      <poster v-for="(movie,index) in videodata" v-on:make-selection="loadMovie" :vidsource="movie.vidsource"
+      <poster v-for="(movie,index) in videodata" v-on:make-selection="loadMovie" :source="movie.source"
         :thumb="movie.thumb" :movie="movie" :key="index"></poster>
     </ul>
 
@@ -38,14 +39,17 @@
 
     <section class="hidden-movies" :class="{'show-movie': showDetails}">
       <h2 class="hidden">Media details</h2>
-      <h3 class="movie-title">{{videotitle}}</h3>
-      <video :src="'video/'+videosource" autoplay controls></video>
+      <h3 class="movie-title">{{title}}</h3>
+      <div class="media">
+        <audio v-if="type == 'audio'" :src="'video/'+ source" controls autoplay></audio>
+        <video v-else :src="'video/'+ source" autoplay></video>
+      </div>
       <div class="movie-details">
-        <p>{{videodescription}}</p>
+        <h2 @click="togglePlayPause">{{status.paused}}</h2>
       </div>
     </section>
 
-    <div class="up-arrow"><span>^</span></div>
+
   </main>
 
   <footer>
@@ -53,7 +57,7 @@
     <p>© 2020 ezaccess Inc. All rights reserved.</p>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
-  <script defer src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
