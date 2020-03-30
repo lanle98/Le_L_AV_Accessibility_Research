@@ -8,16 +8,28 @@ html, body {
 a { 
     text-decoration: none; 
 
-    img { width: 180px; border: thin solid rgba(255, 255, 255, 0.8); }
+    img { width: 180px;
+         border: thin solid rgba(255, 255, 255, 0.8);
+          height:250px;
+          object-fit: cover; 
+          cursor: pointer;
+        }
+}
+
+p{
+    i{
+        opacity: .8;
+        font-size:1rem;
+    }
 }
 
 body {
     display: flex;
     flex-direction: column;
 
-    background-color: white;
+    background-color: #22150B;
 
-    color: #333;
+    color: #E9E8E3;
 
     font-size: 16px;
     font-family: arial, helvetica, sans-serif;
@@ -27,7 +39,7 @@ main { flex: 1 0 auto; }
 
 .hidden { display: none; }
 
-header, footer { padding: 20px 10px; background-color: #333; color: white; }
+header, footer { padding: 20px 10px; background-color:#F36135; color: white; }
 
 footer { 
     width: 100%; 
@@ -50,7 +62,7 @@ ul {
 
 // end list styles
 
-.video-poster-wrapper { text-align: center; margin-top: 60px } 
+.video-poster-wrapper { text-align: center } 
 
 .back-home {
     color: white;

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css" />
 
   <title>AV Accessibility Research</title>
@@ -14,30 +16,28 @@
 <body>
   <main id="app">
     <header>
-      <h1 class="hidden">Video with Vue.js</h1>
-      <nav>
-        <h3 class="app-title">Deluxe Roomate</h3>
-
+      <h1 class="hidden">Welcome to ezaccess</h1>
+      <nav class="d-flex justify-content-center">
+        <img class="w-25" alt="logo" src="images/logo.svg">
 
       </nav>
     </header>
 
+    <h3 class="text-center p-4">MAKING EVERYTHING ACCESSIBLE FOR EVERYONE</h3>
+    <p class="instructions lead">
+      Click or press the number relative to the media that you would like to select<br>
+      <i>Example: press 1 on your keyboard to choose the first media</i>
+    </p>
     <ul class="video-poster-wrapper">
+      <h2 class="hidden">Media list</h2>
       <poster v-for="(movie,index) in videodata" v-on:make-selection="loadMovie" :vidsource="movie.vidsource"
         :thumb="movie.thumb" :movie="movie" :key="index"></poster>
-
-      <!-- <li v-for="movie in videodata">
-          <a :href="movie.vidsource" v-on:click.prevent="loadMovie(movie)">
-            <img :src="'images/' + movie.thumb" alt="movie poster" />
-          </a>
-        </li> -->
     </ul>
 
-    <p class="instructions">
-      <i>Click on a poster to preview the movie!</i>
-    </p>
+
 
     <section class="hidden-movies" :class="{'show-movie': showDetails}">
+      <h2 class="hidden">Media details</h2>
       <h3 class="movie-title">{{videotitle}}</h3>
       <video :src="'video/'+videosource" autoplay controls></video>
       <div class="movie-details">
@@ -49,10 +49,8 @@
   </main>
 
   <footer>
-    <p>
-      All content &copy; 2020 Netflix, Marvel and Disney, so don't tell them
-      we stole it
-    </p>
+    <h1 class="hidden">Footer</h1>
+    <p>© 2020 ezaccess Inc. All rights reserved.</p>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
   <script defer src="js/main.js"></script>

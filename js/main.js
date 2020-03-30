@@ -9,7 +9,7 @@ Vue.component("poster", {
   template: `
   <li>
       <a :href="vidsource" v-on:click.prevent="$emit('make-selection', movie)">
-        <img :src="'images/' + thumb" alt="movie poster" />
+        <img class="" :src="'images/' + thumb" alt="movie poster" />
       </a>
   </li>
   `
@@ -25,17 +25,17 @@ var vm = new Vue({
       {
         name: "Can't Help Falling In Love",
         thumb: "Elvis-Presley.jpg",
-        vidsource: "forceawakens.mp4",
+        source: "Cant Help Falling In Love.mp4",
       },
       {
         name: "The Asphalt Jungle",
         thumb: "The Asphalt Jungle.jpg",
-        vidsource: "strangerthings.mp4",
+        source: "strangerthings.mp4",
       },
       {
         name: "The Jack Benny Program",
         thumb: "The Jack Benny Program.jpg",
-        vidsource: "avengers.mp4",
+        source: "avengers.mp4",
       }
     ],
 
@@ -46,10 +46,7 @@ var vm = new Vue({
     showDetails: false
   },
 
-  created: function () {
-    //vue instance is ready to go, mostly - add some live data to the VM
-    this.fetchUsers();
-  },
+
 
   methods: {
     logInOut() {
@@ -75,13 +72,6 @@ var vm = new Vue({
       this.showDetails = true;
     },
 
-    fetchUsers() {
-      //get our user data and push it back to the VM
-      const url = "./includes/index.php?user=true";
-      fetch(url)
-        .then(res => res.json())
-        .then(data => (this.user = data[0]))
-        .catch(err => console.log(err));
-    }
+
   }
 });
