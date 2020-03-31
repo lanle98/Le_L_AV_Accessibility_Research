@@ -37,7 +37,22 @@ var vm = new Vue({
         name: "Can't Help Falling In Love",
         thumb: "Elvis-Presley.jpg",
         source: "cant_help_falling_in_love.mp3",
-        description: "Đừng vội vàng"
+        description: `Wise men say only fools rush in
+        But I can't help falling in love with you
+        Shall I stay
+        Would it be a sin
+        If I can't help falling in love with you
+        Like a river flows surely to the sea
+        Darling so it goes
+        Some things are meant to be
+        Take my hand, take my whole life too
+        For I can't help falling in love with you
+        Like a river flows surely to the sea
+        Darling so it goes
+        Some things are meant to be
+        Take my hand, take my whole life too
+        For I can't help falling in love with you
+        For I can't help falling in love with you`
       },
       {
         name: "The Asphalt Jungle",
@@ -46,9 +61,9 @@ var vm = new Vue({
         description: ""
       },
       {
-        name: "The Jack Benny Program",
-        thumb: "The Jack Benny Program.jpg",
-        source: "avengers.mp4",
+        name: "Stranger Things",
+        thumb: "stranger_things.jpg",
+        source: "strangerthings.mp4",
         description: ""
       }
     ],
@@ -145,6 +160,11 @@ var vm = new Vue({
 
     // this is ES6 data destructuring = pull the keys and values you need, not the whole object
     loadMovie({ name, description, source }) {
+      this.status.paused = false
+      this.status.muted = false
+      this.status.description = false
+
+
       this.title = name;
       this.description = description;
       this.source = source;

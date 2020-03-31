@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css" />
-
+  <script src="https://kit.fontawesome.com/07cd3ec3ab.js" crossorigin="anonymous"></script>
   <title>AV Accessibility Research</title>
 </head>
 
@@ -47,10 +47,17 @@
       </div>
       <progress class="w-100" ref="progress" id="progress" value='20' aria-label="progress bar"
         role="progressbar"></progress>
-      <div class="media-controls row justify-content-around">
-        <h2 @click="togglePlayPause">{{status.paused}}</h2>
-        <h2 @click="toggleMute">{{status.muted}}</h2>
-        <h2 @click="toggleTranscript">{{status.transcript}}</h2>
+      <ul class="text-center p-2">
+        <li>SPACEBAR : Play/Pause</li>
+        <li>M : Mute/Unmute</li>
+        <li>T : Transcript</li>
+      </ul>
+      <div class="media-controls row justify-content-around m-5 text-center">
+        <i v-if="status.paused" @click="togglePlayPause" class="fas fa-play col-4"></i>
+        <i v-else @click="togglePlayPause" class="fas fa-pause col-4"></i>
+        <i v-if="status.muted" @click="toggleMute" class="fas fa-volume-off col-4"></i>
+        <i v-else @click="toggleMute" class="fas fa-volume-up col-4"></i>
+        <i @click="toggleTranscript" class="fas fa-closed-captioning col-4"></i>
       </div>
       <div v-if="status.transcript">
         {{description}}
