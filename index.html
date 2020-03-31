@@ -41,11 +41,19 @@
       <h2 class="hidden">Media details</h2>
       <h3 class="movie-title">{{title}}</h3>
       <div class="media">
-        <audio v-if="type == 'audio'" :src="'video/'+ source" controls autoplay></audio>
-        <video v-else :src="'video/'+ source" autoplay></video>
+        <audio ref='media' v-on:timeupdate="progress" v-if="type == 'audio'" :src="'video/'+ source" autoplay></audio>
+        <video ref="media" v-on:timeupdate="progress" v-else :src="'video/'+ source" autoplay></video>
+
       </div>
-      <div class="movie-details">
+      <progress class="w-100" ref="progress" id="progress" value='20' aria-label="progress bar"
+        role="progressbar"></progress>
+      <div class="media-controls row justify-content-around">
         <h2 @click="togglePlayPause">{{status.paused}}</h2>
+        <h2 @click="toggleMute">{{status.muted}}</h2>
+        <h2 @click="toggleTranscript">{{status.transcript}}</h2>
+      </div>
+      <div v-if="status.transcript">
+        {{description}}
       </div>
     </section>
 

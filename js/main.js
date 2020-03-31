@@ -13,7 +13,9 @@ Vue.component("poster", {
   template: `
   <li>
       <a :href="source" v-on:click.prevent="$emit('make-selection', movie)">
+       
         <img class="" :src="'images/' + thumb" alt="movie poster" />
+        <h4 class='p-2'>{{movie.name}}</h4>
       </a>
   </li>
   `
@@ -35,34 +37,43 @@ var vm = new Vue({
         name: "Can't Help Falling In Love",
         thumb: "Elvis-Presley.jpg",
         source: "cant_help_falling_in_love.mp3",
+        description: "Đừng vội vàng"
       },
       {
         name: "The Asphalt Jungle",
         thumb: "The Asphalt Jungle.jpg",
-        source: "strangerthings.mp4",
+        source: "the_asphalt_jungle.mp4",
+        description: ""
       },
       {
         name: "The Jack Benny Program",
         thumb: "The Jack Benny Program.jpg",
         source: "avengers.mp4",
+        description: ""
       }
     ],
 
     status: {
       paused: false,
       muted: false,
-      stopped: false
+      transcript: false
     },
 
     title: "",
-    videodescription: "",
+    description: "",
     source: "",
 
     type: null,
     showDetails: false
   },
   mounted() {
-    let movies = document.querySelectorAll("li");
+
+    this.status.paused = false
+    this.status.muted = false
+    this.status.description = false
+
+
+
 
     //set vueobject
     let VueObject = this
@@ -79,12 +90,31 @@ var vm = new Vue({
 
 
         if (event.keyCode == keycode && event.keyCode <= 57) {
-          VueObject.title = VueObject.videodata[i].name,
-            VueObject.source = VueObject.videodata[i].source;
+          VueObject.title = VueObject.videodata[i].name
+          VueObject.source = VueObject.videodata[i].source
           VueObject.showDetails = true
+          VueObject.videodata[i].description !== "" ? VueObject.description = VueObject.videodata[i].description : VueObject.description = "No transcript available"
         }
 
 
+
+
+      }
+
+      //play keypress
+      if (event.keyCode == 32) {
+        VueObject.togglePlayPause()
+      }
+
+
+      //mute keypress
+      if (event.keyCode == 77) {
+        VueObject.toggleMute()
+      }
+
+      //show transcript keypress
+      if (event.keyCode == 84) {
+        VueObject.toggleTranscript()
       }
 
       let fileExtension = VueObject.source.split('.').pop()
@@ -94,16 +124,23 @@ var vm = new Vue({
       } else {
         VueObject.type = 'video'
       };
-      console.log(VueObject.type)
+
+
 
     })
+
+
+
+
 
   },
 
 
   methods: {
 
-
+    progress() {
+      this.$refs.progress.value = this.$refs.media.currentTime / this.$refs.media.duration;
+    },
 
 
     // this is ES6 data destructuring = pull the keys and values you need, not the whole object
@@ -111,6 +148,7 @@ var vm = new Vue({
       this.title = name;
       this.description = description;
       this.source = source;
+      this.description !== "" ? this.description = this.description : this.description = "No transcript available"
       let fileExtension = this.source.split('.').pop()
 
       if (fileExtension == 'mp3') {
@@ -119,19 +157,35 @@ var vm = new Vue({
         this.type = 'video'
       }
       this.showDetails = true;
+
     },
 
     togglePlayPause() {
       let media = document.querySelector('.media').lastChild
-      console.log(media.paused)
-      if (media.play()) {
-        this.status.pause = true;
-        media.pause();
-      } else if (media.paused) {
-        console.log('play')
-        this.status.pause = false;
+
+      if (media.paused) {
+        this.status.paused = false;
         media.play();
+      } else {
+        media.pause()
+        this.status.paused = true;
       }
+
+    },
+    toggleMute() {
+      let media = document.querySelector('.media').lastChild
+
+      if (media.muted) {
+        this.status.muted = false;
+        media.muted = false;
+      } else {
+        media.muted = true;
+        this.status.muted = true;
+      }
+    },
+
+    toggleTranscript() {
+      this.status.transcript = !this.status.transcript
     }
   }
-});
+})
